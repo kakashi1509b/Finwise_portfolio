@@ -1,0 +1,69 @@
+/* --- Global Variables & Body --- */
+:root {
+    --background-dark: #0f0f20; --background-light: #1a1a35; --background-widget: #252547;
+    --primary-blue: #0072FF; --primary-blue-hover: #005bb5; --accent-cyan: #00C6FF;
+    --text-primary: #ffffff; --text-secondary: #d1d5db; --text-muted: #9ca3af;
+    --border-color: rgba(74, 85, 104, 0.5); --error-red: #ef4444; --positive-green: #4ade80; --negative-red: #f87171;
+}
+body { background-color: var(--background-dark); color: var(--text-primary); margin: 0; font-family: system-ui, sans-serif; }
+
+/* --- Main Layout --- */
+.dashboard-container { display: flex; height: 100vh; width: 100%; overflow: hidden; }
+.main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+.sidebar { width: 256px; background: var(--background-light); border-right: 1px solid var(--border-color); transition: width 0.3s ease-in-out; display: flex; flex-direction: column; justify-content: space-between; flex-shrink: 0; }
+.sidebar.collapsed { width: 72px; }
+.sidebar-footer { padding-bottom: 1rem; }
+
+/* --- Sidebar --- */
+.sidebar-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem; height: 64px; box-sizing: border-box; }
+.sidebar.collapsed .sidebar-header { justify-content: center; }
+.logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.25rem; font-weight: 700; }
+.sidebar-toggle-btn { background: transparent; border: none; color: var(--text-secondary); cursor: pointer; padding: 0.5rem; border-radius: 4px; }
+.sidebar-nav { padding: 1rem 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.sidebar-item { width: 100%; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-radius: 0.5rem; color: var(--text-secondary); text-decoration: none; border: none; background: transparent; cursor: pointer; text-align: left; font-size: 1rem; transition: all 0.2s; overflow: hidden; white-space: nowrap; text-transform: capitalize; }
+.sidebar.collapsed .sidebar-item { justify-content: center; }
+.sidebar-item:hover, .sidebar-item.active { background-color: rgba(255, 255, 255, 0.1); color: var(--text-primary); }
+a.sidebar-item.active { background: linear-gradient(to right, var(--primary-blue), var(--accent-cyan)); font-weight: 600; box-shadow: 0 4px 15px -5px rgba(0, 198, 255, 0.5); }
+.sidebar-item-icon { flex-shrink: 0; width: 20px; height: 20px; }
+.sidebar-item.logout { margin: 0 0.75rem; }
+
+/* --- Main Content --- */
+.main-header { display: flex; justify-content: flex-end; align-items: center; padding: 0 1.5rem; height: 65px; border-bottom: 1px solid var(--border-color); flex-shrink: 0; }
+.main-header-title { margin: 0; font-size: 1.5rem; font-weight: 600; }
+.content-area { padding: 1.5rem; }
+.widget { background: var(--background-light); border-radius: 1rem; padding: 1.5rem; border: 1px solid var(--border-color); margin-bottom: 1.5rem; }
+.widget-title { font-size: 1.25rem; font-weight: 600; margin: 0 0 1.5rem 0; }
+
+/* --- Analysis & Price Views --- */
+.analysis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+.news-summary { white-space: pre-wrap; }
+.rating-widget { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.rating-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid var(--primary-blue); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.2rem; }
+.rating-circle span { font-size: 3rem; font-weight: bold; }
+.price-form { display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center; }
+.price-form input, .price-form select { padding: 0.75rem; background-color: #2d3748; border: 1px solid var(--border-color); color: white; border-radius: 6px; }
+.price-form button { padding: 0.75rem 1.5rem; background-color: var(--primary-blue); border: none; color: white; border-radius: 6px; cursor: pointer; font-weight: bold; }
+.price-result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; text-align: center; }
+.price-label { color: var(--text-muted); margin: 0; }
+.price-value { font-size: 1.75rem; font-weight: bold; margin: 0.5rem 0 0 0; }
+.price-value.positive { color: var(--positive-green); }
+.price-value.negative { color: var(--negative-red); }
+
+/* --- General & Chatbot --- */
+.error-message { color: var(--error-red); background-color: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 8px; }
+.loading-spinner { border: 4px solid rgba(255, 255, 255, 0.2); border-left-color: var(--primary-blue); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 5rem auto; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.chatbot-toggle { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; background-color: var(--primary-blue); color: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+.chatbot-window { position: fixed; bottom: 90px; right: 20px; width: 350px; height: 500px; background-color: var(--background-light); border-radius: 12px; display: flex; flex-direction: column; z-index: 1000; border: 1px solid var(--border-color); }
+.chatbot-header { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background-color: var(--background-widget); }
+.chatbot-messages { flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; }
+.message { padding: 0.5rem 0.75rem; border-radius: 12px; max-width: 80%; line-height: 1.4; }
+.message.user { background-color: var(--primary-blue); color: white; align-self: flex-end; }
+.message.ai { background-color: #4b5563; color: white; align-self: flex-start; }
+.chatbot-input-form { display: flex; padding: 0.75rem; border-top: 1px solid var(--border-color); }
+.chatbot-input-form input { flex: 1; background-color: #2d3748; border: 1px solid var(--border-color); color: white; padding: 0.5rem 0.75rem; border-radius: 15px; }
+.chatbot-input-form button { background: var(--primary-blue); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; margin-left: 0.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.typing-indicator span { height: 8px; width: 8px; background-color: var(--text-muted); border-radius: 50%; display: inline-block; animation: wave 1.3s infinite; }
+.typing-indicator span:nth-of-type(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-of-type(3) { animation-delay: 0.4s; }
+@keyframes wave { 0%, 60%, 100% { transform: initial; } 30% { transform: translateY(-8px); } }

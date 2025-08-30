@@ -1,0 +1,364 @@
+/* homepage.css */
+
+/* --- Root Variables and Body --- */
+:root {
+  --primary-color: #a855f7; /* Purple */
+  --secondary-color: #3b82f6; /* Blue */
+  --dark-bg: #0b0b1f;
+  --dark-bg-secondary: #12122d;
+  --text-light: #f0f0f0;
+  --text-muted: #bbb;
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+/* --- Header & Navigation --- */
+.header {
+  padding: 1rem 5%;
+  background-color: rgba(11, 11, 31, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #2a2a4a;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--primary-color);
+}
+
+.header-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.menu-items {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.menu-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.menu-link:hover {
+  color: var(--text-light);
+}
+
+.signup-button {
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: transform 0.3s ease;
+}
+
+.signup-button:hover {
+  transform: translateY(-2px);
+}
+
+/* --- Main Content & Hero Section --- */
+.main-content {
+  padding: 2rem 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 4rem 0;
+  text-align: left;
+}
+
+.hero-text-container {
+  flex: 1;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  max-width: 500px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.try-it-button, .demo-button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.try-it-button {
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  color: white;
+}
+
+.demo-button {
+  background-color: #2a2a4a;
+  color: var(--text-light);
+}
+
+.try-it-button:hover, .demo-button:hover {
+    transform: translateY(-3px);
+}
+
+.avatar-placeholder-container {
+  flex-shrink: 0;
+}
+
+.avatar-placeholder {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: var(--dark-bg-secondary);
+  display: grid;
+  place-content: center;
+  font-size: 1.5rem;
+  border: 2px dashed var(--primary-color);
+}
+
+/* --- How It Works Section --- */
+.how-it-works-section {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.step-card {
+  background-color: var(--dark-bg-secondary);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #2a2a4a;
+  text-align: left;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* --- Floating Chatbot --- */
+.chatbot-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+}
+
+.chatbot-toggle-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.chatbot-toggle-button:hover {
+  transform: scale(1.1);
+}
+
+.chatbot-window {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 350px;
+  height: 500px;
+  background-color: var(--dark-bg-secondary);
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slide-up 0.3s ease-out;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.chatbot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #1a1a3a;
+  border-bottom: 1px solid #2a2a4a;
+}
+
+.chatbot-title {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.chatbot-close-button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.chatbot-messages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.chat-message {
+  display: flex;
+  max-width: 80%;
+}
+
+.chat-message.bot {
+  align-self: flex-start;
+}
+
+.chat-message.user {
+  align-self: flex-end;
+}
+
+.message-bubble {
+  padding: 0.7rem 1rem;
+  border-radius: 18px;
+  line-height: 1.4;
+}
+
+.chat-message.bot .message-bubble {
+  background-color: #2a2a4a;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-message.user .message-bubble {
+  background-color: var(--secondary-color);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.chatbot-input-form {
+  padding: 1rem;
+  border-top: 1px solid #2a2a4a;
+}
+
+.chatbot-input {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #3a3a5a;
+  background-color: #1a1a3a;
+  color: var(--text-light);
+  outline: none;
+  box-sizing: border-box; /* Important for padding */
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-buttons {
+    justify-content: center;
+  }
+  .menu-items {
+    display: none; /* Simple hiding for mobile, can be replaced with a hamburger menu */
+  }
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  .avatar-placeholder {
+    width: 200px;
+    height: 200px;
+  }
+  .chatbot-window {
+    width: 100vw;
+    height: 80vh;
+    bottom: 0;
+    right: 0;
+    border-radius: 0;
+  }
+  .chatbot-toggle-button {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
