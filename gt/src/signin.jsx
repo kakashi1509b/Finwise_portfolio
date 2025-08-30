@@ -1,10 +1,5 @@
-// signin.jsx - Final Corrected Version
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-// Make sure the CSS file is imported
-import './signin.css';
 
 export default function Signin() {
   const [email, setEmail] = useState('');
@@ -19,23 +14,16 @@ export default function Signin() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ username: email, password })
       });
 
       if (response.ok) {
-  console.log('Sign-in successful');
-  
-  // This line seems to be for storing the user's email, which is fine.
-  window.sessionStorage.setItem('admin', email); 
-
-  // Change this line from '/'
-  // navigate('/'); 
-
-  // To '/dashboard'
-  navigate('/dashboard'); // ✅ This will redirect to your dashboard page
-} else {
-  alert('Invalid Credentials');
-}
+        console.log('Sign-in successful');
+        window.sessionStorage.setItem('admin', email);
+        navigate('/dashboard');
+      } else {
+        alert('Invalid Credentials');
+      }
     } catch (error) {
       console.error('Sign-in error:', error);
       alert("An error occurred during sign-in.");
@@ -43,53 +31,166 @@ export default function Signin() {
   };
 
   return (
-    <div className="login-container">
-      {/* Left Section */}
-      <div className="left-section">
-        <div className="logo">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15.5V14h-2V9.5h2V12h1.5c1.45 0 2.625-1.18 2.625-2.625S14.95 6.75 13.5 6.75h-3c-1.1 0-2 .9-2 2v8h1.5v-3.5h1V12h1.5c.58 0 1.05.47 1.05 1.05s-.47 1.05-1.05 1.05h-1.5v3.5h-1V17.5zm5.5-2.5V14h-1V9.5h1V12h1.5c1.45 0 2.625-1.18 2.625-2.625S19.95 6.75 18.5 6.75h-3c-1.1 0-2 .9-2 2v8h1.5v-3.5h1V12h1.5c.58 0 1.05.47 1.05 1.05s-.47 1.05-1.05 1.05h-1.5z"/></svg>
-          Fin<span className="highlight">Wise</span>
-        </div>
-        <img src="https://i.ibb.co/RNcxZxH/planet-character.png" alt="Illustration" className="illustration" />
-        <h2>Sign in to your <br /> <span className="highlight">financial journey</span></h2>
-        <p>Get back control — one step at a time.</p>
-      </div>
-
-      {/* Right Section */}
-      <div className="right-section">
-        <div className="form-box">
-          <h2>Sign In</h2>
-
-          <label>Email address</label>
-          <input 
-            type="email" 
-            placeholder="you@example.com" 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-
-          <label>Password</label>
-          <input 
-            type="password" 
-            placeholder="Enter your password" 
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          
-          <button onClick={handleSignIn} className="signin-btn">Sign In</button>
-          
-          <p className="or-text">Or continue with</p>
-          <div className="social-buttons">
-            <button className="google-btn">Google</button>
-            <button className="facebook-btn">Facebook</button>
+    <>
+      <style>{`
+        .login-container {
+          display: flex;
+          height: 100vh;
+          font-family: 'Inter', sans-serif;
+          background-color: #f8f9fa;
+        }
+        .left-section {
+          flex: 1;
+          background-color: #1a1a1a;
+          color: white;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 4rem;
+          text-align: center;
+        }
+        .logo {
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-bottom: 2rem;
+        }
+        .logo .highlight {
+          color: #4CAF50;
+        }
+        .illustration {
+          max-width: 300px;
+          margin: 2rem 0;
+        }
+        .left-section h2 {
+          font-size: 2rem;
+          margin-bottom: 1rem;
+        }
+        .left-section .highlight {
+          color: #4CAF50;
+        }
+        .left-section p {
+          color: #ccc;
+          max-width: 350px;
+        }
+        .right-section {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .form-box {
+          width: 100%;
+          max-width: 400px;
+          padding: 3rem;
+          background: white;
+          border-radius: 12px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .form-box h2 {
+          font-size: 2rem;
+          margin-bottom: 2rem;
+          text-align: center;
+          color: #333;
+        }
+        .form-box label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+          color: #555;
+        }
+        .form-box input {
+          width: 100%;
+          padding: 1rem;
+          margin-bottom: 1.5rem;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          font-size: 1rem;
+          transition: border-color 0.3s;
+        }
+        .form-box input:focus {
+          outline: none;
+          border-color: #4CAF50;
+        }
+        .signin-btn {
+          width: 100%;
+          padding: 1rem;
+          border: none;
+          border-radius: 8px;
+          background-color: #4CAF50;
+          color: white;
+          font-size: 1rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+        .signin-btn:hover {
+          background-color: #45a049;
+        }
+        .signup-link {
+          margin-top: 1.5rem;
+          text-align: center;
+          color: #555;
+        }
+        .signup-link a {
+          color: #4CAF50;
+          font-weight: 600;
+          text-decoration: none;
+        }
+        .signup-link a:hover {
+          text-decoration: underline;
+        }
+         .logo svg {
+            display: none;
+        }
+        .or-text {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #aaa;
+        }
+      `}</style>
+      <div className="login-container">
+        <div className="left-section">
+          <div className="logo">
+            Fin<span className="highlight">Wise</span>
           </div>
-          
-          <p className="signup-link">
+          <img src="https://i.ibb.co/RNcxZxH/planet-character.png" alt="Illustration" className="illustration" />
+          <h2>Sign in to your <br /> <span className="highlight">financial journey</span></h2>
+          <p>Get back control — one step at a time.</p>
+        </div>
+
+        <div className="right-section">
+          <div className="form-box">
+            <h2>Sign In</h2>
+
+            <label>Email address</label>
+            <input 
+              type="email" 
+              placeholder="you@example.com" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <label>Password</label>
+            <input 
+              type="password" 
+              placeholder="Enter your password" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            
+            <button onClick={handleSignIn} className="signin-btn">Sign In</button>
+            
+            <p className="or-text">Or continue with</p>
+            
+            
+            <p className="signup-link">
               Don't have an account?{" "}
               <Link to="/signup">Sign up now</Link>
-          </p>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
